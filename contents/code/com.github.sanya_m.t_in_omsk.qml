@@ -26,27 +26,35 @@ import org.kde.plasma.components 0.1 as PlasmaComponents
 Item {
     id: root
 
-    function updateRequest() {
-        var request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if (request.readyState != 4) {
-                return
-            }
-            var text = request.responseText
-            if (text == null) {
-                return
-            }
-            var matches = text.match(/"([^"]+)"/)
-            if (matches == null || matches.length != 2) {
-                return
-            }
-            label.text = matches[1]
+    function response() {
+        if (request.readyState != 4) {
+            return
         }
+        var text = request.responseText
+        if (text == null) {
+            return
+        }
+        var matches = text.match(/"([^"]+)"/)
+        if (matches == null || matches.length != 2) {
+            return
+        }
+        label.text = matches[1]
+    }
+
+    function updateRequest() {
+        if (request.readyState != 0 && request.readyState != 4) {
+            return
+        }
+
         request.open("GET", "http://dove.omsk.otpbank.ru/files/weather.js");
         request.send(null);
     }
     
     Component.onCompleted: {
+        request = new XMLHttpRequest()
+        request.onreadystatechange = response
+        label.text = "?"
+
         updateRequest()
     }
 
@@ -69,7 +77,7 @@ Item {
     }
     
     Timer {
-        interval: 120000
+        interval: 5 * 60 * 1000
         running: true
         repeat: true
         onTriggered: updateRequest()
