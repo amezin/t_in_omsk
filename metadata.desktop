@@ -1,0 +1,21 @@
+[Desktop Entry]
+Comment=Shows current temperature in OMSK
+Encoding=UTF-8
+Icon=weather-freezing-rain
+Keywords=Weather,Temperature,Omsk
+Name=Temperature in Omsk
+Type=Service
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Alexander Mezin
+X-KDE-PluginInfo-Category=Environment and Weather
+X-KDE-PluginInfo-Email=mezin.alexander@gmail.com
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=com.github.sanya_m.t_in_omsk
+X-KDE-PluginInfo-Version=1
+X-KDE-PluginInfo-Website=https://github.com/sanya-m
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-Plasma-DefaultSize=200,100
+X-Plasma-MainScript=code/com.github.sanya_m.t_in_omsk.qml
+X-Plasma-NotificationArea=true
+X-Plasma-RemoteLocation=
