@@ -34,7 +34,7 @@ Item {
         if (text == null) {
             return
         }
-        var matches = text.match(/"([^"]+)"/)
+        var matches = text.match(/"([^".]+)[".]/)
         if (matches == null || matches.length != 2) {
             return
         }
