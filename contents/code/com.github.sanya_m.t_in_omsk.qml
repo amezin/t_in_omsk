@@ -38,7 +38,7 @@ Item {
         if (matches == null || matches.length != 2) {
             return
         }
-        label.text = matches[1]
+        label.text = matches[1] + "°C"
     }
 
     function updateRequest() {
