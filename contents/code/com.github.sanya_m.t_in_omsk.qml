@@ -41,7 +41,7 @@ Item {
         label.text = matches[1] + "°C"
     }
 
-    function updateRequest() {
+    function action_refresh() {
         if (request.readyState != 0 && request.readyState != 4) {
             return
         }
@@ -55,7 +55,9 @@ Item {
         request.onreadystatechange = response
         label.text = "?"
 
-        updateRequest()
+        action_refresh()
+
+        plasmoid.setAction("refresh", "Refresh")
     }
 
     PlasmaComponents.Label {
@@ -80,6 +82,11 @@ Item {
         interval: 5 * 60 * 1000
         running: true
         repeat: true
-        onTriggered: updateRequest()
+        onTriggered: action_refresh()
+    }
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: action_refresh()
     }
 }
