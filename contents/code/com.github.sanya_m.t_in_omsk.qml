@@ -38,7 +38,7 @@ Item {
         if (matches == null || matches.length != 2) {
             return
         }
-        label.text = matches[1] + "°C"
+        helper.text = matches[1] + "°C"
     }
 
     function action_refresh() {
@@ -49,11 +49,11 @@ Item {
         request.open("GET", "http://dove.omsk.otpbank.ru/files/weather.js");
         request.send(null);
     }
-    
+
     Component.onCompleted: {
         request = new XMLHttpRequest()
         request.onreadystatechange = response
-        label.text = "?"
+        helper.text = "?"
 
         action_refresh()
 
@@ -61,14 +61,21 @@ Item {
     }
 
     PlasmaComponents.Label {
+        id: helper
+        visible: false
+        font.pixelSize: root.height
+        anchors.top: parent.top
+        anchors.left: parent.left
+    }
+
+    PlasmaComponents.Label {
         id: label
+        text: helper.text
         anchors.centerIn: parent
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         style: Text.Raised;
-        font.pixelSize: root.height / 2
-        scale: paintedWidth > root.width ? (root.width / paintedWidth) : 1
-        transformOrigin: Item.Center
+        font.pixelSize: root.height * Math.min(1, root.width / helper.implicitWidth) 
     }
 
     PlasmaCore.ToolTip {
