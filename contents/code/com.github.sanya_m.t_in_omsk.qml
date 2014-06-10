@@ -38,7 +38,7 @@ Item {
         if (matches == null || matches.length != 2) {
             return
         }
-        helper.text = matches[1] + "°C"
+        label.text = matches[1] + "°C"
     }
 
     function action_refresh() {
@@ -53,7 +53,7 @@ Item {
     Component.onCompleted: {
         request = new XMLHttpRequest()
         request.onreadystatechange = response
-        helper.text = "?"
+        label.text = "?"
 
         action_refresh()
 
@@ -61,21 +61,10 @@ Item {
     }
 
     PlasmaComponents.Label {
-        id: helper
-        visible: false
-        font.pixelSize: root.height
-        anchors.top: parent.top
-        anchors.left: parent.left
-    }
-
-    PlasmaComponents.Label {
         id: label
-        text: helper.text
         anchors.centerIn: parent
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
         style: Text.Raised;
-        font.pixelSize: root.height * Math.min(1, root.width / helper.implicitWidth) 
+        font.pixelSize: root.height * 0.5
     }
 
     PlasmaCore.ToolTip {
